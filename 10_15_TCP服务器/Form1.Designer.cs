@@ -61,6 +61,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(180, 33);
             this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "127.0.0.1";
             // 
             // label2
             // 
@@ -79,6 +80,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(133, 33);
             this.textBox2.TabIndex = 1;
+            this.textBox2.Text = "8080";
             // 
             // button1
             // 
@@ -168,6 +170,7 @@
             this.button3.TabIndex = 8;
             this.button3.Text = "发 送";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -178,6 +181,7 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "清 空";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
@@ -200,6 +204,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

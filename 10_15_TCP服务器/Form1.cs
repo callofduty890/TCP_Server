@@ -93,20 +93,51 @@ namespace _10_15_TCP服务器
             //转换Socket  里氏转换
             while (true)
             {
-                //通过 myClientSocket 接收数据
-                int resultNumber = myClientSocket.Receive(_result);
-                //判断接收的内容是否大于0，如果小于0说明没有内容
-                if (resultNumber>0)
+                //当连接出现问题的时候需要进行处理
+                try
                 {
-                    //拼接字符串，形成消息
-                    string str = string.Format("接收客户端{0} 消息{1} \r\n", myClientSocket.RemoteEndPoint.ToString(), Encoding.UTF8.GetString(_result, 0, resultNumber));
-                    //添加到消息列表当中
-                    this.listBox1.Items.Add(str);
+                    //通过 myClientSocket 接收数据
+                    int resultNumber = myClientSocket.Receive(_result);
+                    //判断接收的内容是否大于0，如果小于0说明没有内容
+                    if (resultNumber>0)
+                    {
+                        //拼接字符串，形成消息
+                        string str = string.Format("接收客户端{0} 消息{1} \r\n", myClientSocket.RemoteEndPoint.ToString(), Encoding.UTF8.GetString(_result, 0, resultNumber));
+                        //添加到消息列表当中
+                        this.listBox1.Items.Add(str);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    //输出可能的错误提示
+                    //MessageBox.Show(ex.Message.ToString(), "错误提示");
+                    Console.WriteLine("错误：{0}", ex.Message);
+                    //关闭Socket对象
+                    myClientSocket.Close();
+                }
+
             }
 
         }
-
-
+        //发送按钮
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //获取IP的地址
+            string IPandPort = this.comboBox1.SelectedItem.ToString();
+            //获取要发送的内容 : 消息编辑框
+            string SendMessage = this.textBox3.Text;
+            //发送消息  - 字典中获取对象然后发送
+            ascok[IPandPort].Send(Encoding.UTF8.GetBytes(SendMessage));
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //关闭跨线程访问限制  能自由访问控件
+            Control.CheckForIllegalCrossThreadCalls = false;
+        }
+        //清空
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.textBox3.Text = "";
+        }
     }
 }
