@@ -50,6 +50,7 @@
             this.button1.TabIndex = 7;
             this.button1.Text = "连接服务器";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox2
             // 
@@ -58,6 +59,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(133, 33);
             this.textBox2.TabIndex = 5;
+            this.textBox2.Text = "8080";
             // 
             // label2
             // 
@@ -76,6 +78,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(180, 33);
             this.textBox1.TabIndex = 6;
+            this.textBox1.Text = "127.0.0.1";
             // 
             // label1
             // 
@@ -133,6 +136,7 @@
             this.button2.TabIndex = 12;
             this.button2.Text = "发 送";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 

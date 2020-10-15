@@ -75,12 +75,12 @@ namespace _10_15_TCP服务器
                 this.listBox1.Items.Add(clientSocket.RemoteEndPoint.ToString()+"链接成功");
 
                 //发送消息给连接上的客户端,提示已经连接上服务器
-                clientSocket.Send(Encoding.UTF8.GetBytes("成功连接上服务器！"));
+                //clientSocket.Send(Encoding.UTF8.GetBytes("成功连接上服务器！"));
 
                 //启动会话线程用户接受发送消息
-                Thread ReceiveThread = new Thread(()=>ReceiveMessage(clientSocket));
+                Thread ReceiveThread = new Thread(ReceiveMessage);
                 ReceiveThread.IsBackground = true;
-                ReceiveThread.Start();
+                ReceiveThread.Start(clientSocket);
             }   
         }
 
@@ -88,9 +88,10 @@ namespace _10_15_TCP服务器
         //创建全局缓存变量
         private static byte[] _result = new byte[1024];
         //线程的功能函数=> 回复与发送
-        public void ReceiveMessage(Socket myClientSocket)
+        public void ReceiveMessage(object ClientSocket)
         {
             //转换Socket  里氏转换
+            Socket myClientSocket = (Socket)ClientSocket;
             while (true)
             {
                 //当连接出现问题的时候需要进行处理
@@ -126,6 +127,8 @@ namespace _10_15_TCP服务器
             string IPandPort = this.comboBox1.SelectedItem.ToString();
             //获取要发送的内容 : 消息编辑框
             string SendMessage = this.textBox3.Text;
+            Console.WriteLine("this.textBox3.Text:{0}", this.textBox3.Text);
+            Console.WriteLine(SendMessage);
             //发送消息  - 字典中获取对象然后发送
             ascok[IPandPort].Send(Encoding.UTF8.GetBytes(SendMessage));
         }
