@@ -75,7 +75,7 @@ namespace _10_15_TCP服务器
                 this.listBox1.Items.Add(clientSocket.RemoteEndPoint.ToString()+"链接成功");
 
                 //发送消息给连接上的客户端,提示已经连接上服务器
-                //clientSocket.Send(Encoding.UTF8.GetBytes("成功连接上服务器！"));
+                clientSocket.Send(Encoding.UTF8.GetBytes("成功连接上服务器！"));
 
                 //启动会话线程用户接受发送消息
                 Thread ReceiveThread = new Thread(ReceiveMessage);

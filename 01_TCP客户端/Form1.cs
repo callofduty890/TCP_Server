@@ -69,7 +69,7 @@ namespace _01_TCP客户端
                 {
                     //拼接字符串
                     string str = string.Format("{0} 接收服务器消息: {1} \r\n",
-                        DateTime.Now.ToString(), Encoding.UTF8.GetString(_result));
+                        DateTime.Now.ToString(), Encoding.UTF8.GetString(_result, 0, recelivelength));
 
 
                     Console.WriteLine(Encoding.UTF8.GetString(_result));
